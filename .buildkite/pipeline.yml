@@ -1,20 +1,20 @@
-steps:
-  - label: run bats tests
-    plugins:
-      - docker-compose#v3.9.0:
-          run: tests
+# steps:
+#   - label: run bats tests
+#     plugins:
+#       - docker-compose#v3.9.0:
+#           run: tests
 
-  - label: run shellcheck
-    plugins:
-      - shellcheck#${BUILDKITE_COMMIT}:
-          files:
-            - hooks/*
-            - buildkite/*.sh
+#   - label: run shellcheck
+#     plugins:
+#       - shellcheck#${BUILDKITE_COMMIT}:
+#           files:
+#             - hooks/*
+#             - buildkite/*.sh
 
-  - label: ":sparkles: shell lint"
-    plugins:
-      - plugin-linter#v3.0.0:
-          id: shellcheck
+#   - label: ":sparkles: shell lint"
+#     plugins:
+#       - plugin-linter#v3.0.0:
+#           id: shellcheck
 
   - label: "spell check md files"
     plugins:
