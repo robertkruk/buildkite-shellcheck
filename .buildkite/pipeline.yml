@@ -11,7 +11,13 @@ steps:
             - hooks/*
             - buildkite/*.sh
 
-  - label: ":sparkles: lint"
+  - label: ":sparkles: shell lint"
     plugins:
       - plugin-linter#v3.0.0:
           id: shellcheck
+
+  - label: "spell check md files"
+    plugins:
+      - robertkruk/spell-checker#v0.1:
+          pattern: '*.md'
+ 

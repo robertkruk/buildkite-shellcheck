@@ -42,6 +42,16 @@ while IFS=$'\n' read -r option ; do
   options+=("$option")
 done < <(plugin_read_list OPTIONS)
 
+# 
+
+SPELLING_ERR=$( docker run --rm -ti -v $PWD:/workdir tmaier/markdown-spellcheck:latest --report "*.md" 2>&1 )
+FORMATTED_ERR=$( echo $SPELLING_ERR | sed 's/\[1m/<h4>/g;s/\[22m/<\/h4>/g;s/\[31m/<div class="inline red">/g;s/\[39m/<\/div>/g' )
+
+echo $FORMATTED_ERR
+buildkite-agent annotate "<pre class='term'><code><div>The following spelling errors have been found in the markdown files of this project: <\/div>$FORMATTED_ERR</code></pre>" --style "info"
+
+#
+
 BUILDKITE_PLUGIN_SHELLCHECK_VERSION="${BUILDKITE_PLUGIN_SHELLCHECK_VERSION:-stable}"
 
 echo "+++ Running shellcheck on ${#files[@]} files"
