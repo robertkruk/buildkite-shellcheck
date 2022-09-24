@@ -18,6 +18,6 @@
 
   - label: "spell check md files"
     plugins:
-      - robertkruk/spell-checker#latest:
+      - robertkruk/spell-checker#0.1.1:
           pattern: '*.md'
  
